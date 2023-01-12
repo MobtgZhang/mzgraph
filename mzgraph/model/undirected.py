@@ -30,12 +30,12 @@ class UnDiGraph(DiGraph):
     def delete_edge_by_id(self, edge_id):
         edge = self.get_edge(edge_id)
 
-        from_node_id = edge['vertices'][0]
+        from_node_id = edge['edge'][0]
         from_node = self.get_node(from_node_id)
 
         from_node['edges'].remove(edge_id)
 
-        to_node_id = edge['vertices'][1]
+        to_node_id = edge['edge'][1]
         to_node = self.get_node(to_node_id)
 
         to_node['edges'].remove(edge_id)
@@ -47,7 +47,7 @@ class UnDiGraph(DiGraph):
     def move_edge_target(self, edge_id, node_a):
         edge = self.get_edge(edge_id)
 
-        original_target_node_id = edge['vertices'][1]
+        original_target_node_id = edge['edge'][1]
         original_target_node = self.get_node(original_target_node_id)
         original_target_node['edges'].remove(edge_id)
 
@@ -55,7 +55,7 @@ class UnDiGraph(DiGraph):
         new_target_node = self.get_node(new_target_node_id)
         new_target_node['edges'].append(edge_id)
 
-        edge['vertices'] = (edge['vertices'][0], node_a)
+        edge['edge'] = (edge['edge'][0], node_a)
     def move_edge_source(self, edge_id, node_a):
         return self.move_edge_target(edge_id,node_a)
     
